@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row margin">
+				<div class="col-md-6">
+					<div class="card">
+						<h5 class="card-header">
+							Todos
+						</h5>
+						<div class="card-body">
+						{% if todos %}
+							<ul class="list-group">
+							    {% for todo in todos %}
+							    	<li class="list-group-item">
+							    		{{todo.title}}
+							    		<div class="btn-group float-right">
+											<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Action
+											</button>
+											<div class="dropdown-menu">
+												<a class="dropdown-item" href="/edit/{{todo.id}}">Edit</a>
+												<a href="/delete/{{todo.id}}" 
+												   class="dropdown-item"
+												   onclick="return confirm('Are you sure you want to delete todo?');">Delete
+												</a>
+											</div>
+										</div>
+							    	</li>
+							    {% endfor %}
+							</ul>
+						{% else %}
+							<h6 class="card-subtitle mb-2 text-muted">
+								No Todos
+							</h6>
+						{% endif %}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<a type="button" class="btn btn-primary" href="/add-todo">Add Todo</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
